@@ -10,10 +10,11 @@
   "service": "php",
   "remoteUser": "nginx",
   "runServices": [
-    "webserver",
+    "php",
+    "nginx",
     "db",
     "redis",
-    "elasticsearch",
+    "opensearch",
     "rabbitmq",
     "phpmyadmin"
   ],
