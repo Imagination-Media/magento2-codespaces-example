@@ -1,0 +1,110 @@
+version: "3.9"
+services:
+  php:
+    image: ghcr.io/imagination-media/magento-k8s/php-fpm:8.4
+    volumes:
+      - ../:/var/www/html
+    expose:
+      - "22"      # SSH
+      - "8025"    # MailHog
+      - "9000"    # PHP-FPM
+      - "9001"    # Additional PHP-FPM ports for debugging
+      - "9002"    # Additional PHP-FPM ports for debugging
+      - "9003"    # Additional PHP-FPM ports for debugging
+    depends_on:
+      - db
+      - redis
+      - rabbitmq
+      - opensearch
+    environment:
+      - mailhog=1
+      - blackfire=1
+    networks:
+      - magento-network
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+      
+  nginx:
+    image: ghcr.io/imagination-media/magento-k8s/nginx:latest
+    volumes:
+      - ../:/var/www/html
+    expose:
+      - "80"      # Web server
+    ports:
+      - "80:80"   # Web server
+    depends_on:
+      - php
+    networks:
+      - magento-network
+    environment:
+      - frontend_domain=magento.test
+      - frontend_store=default
+      - magento_mode=developer
+      - php_fpm_service=php:9000
+      
+  rabbitmq:
+    image: rabbitmq:4
+    expose:
+      - "5672"
+    networks:
+      - magento-network
+      
+  opensearch:
+    hostname: opensearch
+    image: 'magento/magento-cloud-docker-opensearch:2.4-1.3.5'
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    environment:
+      - cluster.name=docker-cluster
+      - discovery.type=single-node
+      - discovery.seed_hosts=opensearch
+      - bootstrap.memory_lock=true
+      - DISABLE_SECURITY_PLUGIN=true
+    networks:
+      - magento-network
+
+  redis:
+    image: valkey/valkey:8
+    expose:
+      - "6379"
+    networks:
+      - magento-network
+  
+  db:
+    image: mariadb:11.4
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: magento
+      TZ: UTC
+      MYSQL_USER: magento
+      MYSQL_PASSWORD: magento
+    volumes:
+      - db-data:/var/lib/mysql/data
+      - ./mysql-dump:/docker-entrypoint-initdb.d
+    expose:
+      - "3306"
+    ports:
+      - "3306:3306"
+    networks:
+      - magento-network
+  
+  phpmyadmin:
+    image: phpmyadmin:latest
+    expose:
+      - "80"
+    ports:
+      - "8080:80"
+    environment:
+      PMA_ABSOLUTE_URI: "http://ourproject.test/phpmyadmin/"
+    networks:
+      - magento-network
+
+networks:
+  magento-network:
+
+# Persist database information after your VM shuts down
+volumes:
+  db-data:
+  opensearch-data:

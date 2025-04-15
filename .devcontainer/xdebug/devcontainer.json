@@ -1,0 +1,99 @@
+{
+  "hostRequirements": {
+    "cpus": 8,
+    "memory": "16gb",
+    "storage": "32gb"
+  },
+  "name": "Magento 2.4 Xdebug",
+  "workspaceFolder": "/var/www/html",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "php",
+  "remoteUser": "nginx",
+  "runServices": [
+    "webserver",
+    "db",
+    "redis",
+    "elasticsearch",
+    "rabbitmq",
+    "phpmyadmin"
+  ],
+  "forwardPorts": [80, 3306, 5672, 8025, 9000, 9001, 9002, 9003, 5601, 8080],
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "extensions.autoUpdate": true,
+        "extensions.autoCheckUpdates": true,
+        "php.validate.executablePath": "/usr/local/bin/php",
+        "php.suggest.basic": false,
+        "php.executablePath": "/usr/local/bin/php",
+        "intelephense.files.exclude": [
+          "**/.js",
+          "**/.png",
+          "**/.jpg",
+          "**/.css",
+          "**/.pdf",
+          "**/.txt",
+          "**/.csv",
+          "**/.xml",
+          "**/dev",
+          "**/pub",
+          "**/var",
+          "**/generated",
+          "**/.vscode-remote",
+          "**/node_modules"
+        ],
+        "files.exclude": {
+          "**/dev": true,
+          "**/pub": true,
+          "**/var": true,
+          "**/generated": true,
+          "**/.vscode-remote": true,
+          "**/node_modules": true
+        },
+        "intelephense.diagnostics.undefinedTypes": false,
+        "intelephense.telemetry.enabled": false,
+        "intelephense.files.maxSize": 2000000,
+        "intelephense.maxMemory": 8096,
+        "intelephense.diagnostics.implementationErrors": false,
+        "intelephense.files.associations": ["*.php", "*.phtml"],
+        "search.exclude": {
+          "**/generated": true,
+          "**/dev": true,
+          "**/pub": true,
+          "**/var": true,
+          "**/.vscode-remote": true,
+          "**/node_modules": true
+        },
+        "files.watcherExclude": {
+          "**/generated": true,
+          "**/dev": true,
+          "**/pub": true,
+          "**/var": true,
+          "**/.vscode-remote": true,
+          "**/node_modules": true
+        },
+        "intelephense.rename.exclude": [],
+        "intelephense.references.exclude": [],
+        "phpcs.standard": "PSR2",
+        "phpcs.enable": true,
+        "phpcs.executablePath": "/usr/local/bin/phpcs",
+        "phpcs.autoConfigSearch": true,
+        "phpcs.ignorePatterns": ["vendor/*", "pub/*", "lib/*", "setup/*"],
+        "phpcs.showWarnings": true,
+        "phpcs.showSources": true,
+        "phpcs.lintOnSave": true,
+        "phpcs.lintOnlyOpened": true,
+        "phpcs.lintOnType": false,
+        "phpcs.lintOnOpen": false
+      },
+      "extensions": [
+        "xdebug.php-debug",
+        "bmewburn.vscode-intelephense-client",
+        "jerrylopez.magento2-snippets",
+        "benoitalix.hyva-vscode-snippets",
+        "shevaua.phpcs",
+        "GitHub.copilot"
+      ]
+    }
+  }
+}
