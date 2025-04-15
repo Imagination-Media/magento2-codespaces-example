@@ -81,7 +81,7 @@ services:
       MYSQL_PASSWORD: magento
     volumes:
       - db-data:/var/lib/mysql/data
-      - ./mysql-dump:/docker-entrypoint-initdb.d
+      - ../mysql-dump:/docker-entrypoint-initdb.d
     expose:
       - "3306"
     ports:
