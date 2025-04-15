@@ -18,7 +18,18 @@
     "rabbitmq",
     "phpmyadmin"
   ],
-  "forwardPorts": [80, 3306, 5672, 8025, 9000, 9001, 9002, 9003, 5601, 8080],
+  "forwardPorts": [
+    80,     // nginx
+    3306,   // db
+    5672,   // rabbitmq
+    8025,   // MailHog
+    9000,   // PHP-FPM
+    9001,   // Additional PHP-FPM ports for debugging
+    9002,   // Additional PHP-FPM ports for debugging
+    9003,   // Additional PHP-FPM ports for debugging
+    5601,   // OpenSearch (if needed)
+    8080    // phpMyAdmin
+  ],
   "customizations": {
     "vscode": {
       "settings": {
