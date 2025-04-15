@@ -73,3 +73,5 @@ atlassian*
 .DS_Store
 .bash_history
 .local/*
+.dotnet/*
+.vscode-remote/*
