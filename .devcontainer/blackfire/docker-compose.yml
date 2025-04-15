@@ -1,7 +1,7 @@
 version: "3.9"
 services:
   php:
-    image: ghcr.io/imagination-media/magento-k8s/php-fpm:8.4
+    image: ghcr.io/imagination-media/magento-k8s/php-fpm:8.4 
     volumes:
       - ../:/var/www/html
     expose:

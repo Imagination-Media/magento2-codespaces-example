@@ -4,7 +4,7 @@
     "memory": "16gb",
     "storage": "32gb"
   },
-  "name": "Magento 2.4 Blackfire",
+  "name": "[Blackfire] Magento 2.4",
   "workspaceFolder": "/var/www/html",
   "dockerComposeFile": "docker-compose.yml",
   "service": "php",
@@ -18,7 +18,18 @@
     "rabbitmq",
     "phpmyadmin"
   ],
-  "forwardPorts": [80, 3306, 5672, 8025, 9000, 9001, 9002, 9003, 5601, 8080],
+  "forwardPorts": [
+    80,     // nginx
+    3306,   // db
+    5672,   // rabbitmq
+    8025,   // MailHog
+    9000,   // PHP-FPM
+    9001,   // Additional PHP-FPM ports for debugging
+    9002,   // Additional PHP-FPM ports for debugging
+    9003,   // Additional PHP-FPM ports for debugging
+    5601,   // OpenSearch (if needed)
+    8080    // phpMyAdmin
+  ],
   "customizations": {
     "vscode": {
       "settings": {
@@ -27,6 +38,14 @@
         "php.validate.executablePath": "/usr/local/bin/php",
         "php.suggest.basic": false,
         "php.executablePath": "/usr/local/bin/php",
+        "extensions": [
+          "xdebug.php-debug",
+          "bmewburn.vscode-intelephense-client",
+          "jerrylopez.magento2-snippets",
+          "benoitalix.hyva-vscode-snippets",
+          "shevaua.phpcs",
+          "GitHub.copilot"
+        ],
         "intelephense.files.exclude": [
           "**/.js",
           "**/.png",
@@ -86,15 +105,7 @@
         "phpcs.lintOnlyOpened": true,
         "phpcs.lintOnType": false,
         "phpcs.lintOnOpen": false
-      },
-      "extensions": [
-        "xdebug.php-debug",
-        "bmewburn.vscode-intelephense-client",
-        "jerrylopez.magento2-snippets",
-        "benoitalix.hyva-vscode-snippets",
-        "shevaua.phpcs",
-        "GitHub.copilot"
-      ]
+      }
     }
   }
 }
