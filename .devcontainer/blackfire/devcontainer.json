@@ -32,20 +32,20 @@
   ],
   "customizations": {
     "vscode": {
+      "extensions": [
+        "xdebug.php-debug",
+        "bmewburn.vscode-intelephense-client",
+        "jerrylopez.magento2-snippets",
+        "benoitalix.hyva-vscode-snippets",
+        "shevaua.phpcs",
+        "GitHub.copilot"
+      ],
       "settings": {
         "extensions.autoUpdate": true,
         "extensions.autoCheckUpdates": true,
         "php.validate.executablePath": "/usr/local/bin/php",
         "php.suggest.basic": false,
         "php.executablePath": "/usr/local/bin/php",
-        "extensions": [
-          "xdebug.php-debug",
-          "bmewburn.vscode-intelephense-client",
-          "jerrylopez.magento2-snippets",
-          "benoitalix.hyva-vscode-snippets",
-          "shevaua.phpcs",
-          "GitHub.copilot"
-        ],
         "intelephense.files.exclude": [
           "**/.js",
           "**/.png",
