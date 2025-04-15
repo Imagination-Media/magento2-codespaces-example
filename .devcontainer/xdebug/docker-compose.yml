@@ -3,7 +3,7 @@ services:
   php:
     image: ghcr.io/imagination-media/magento-k8s/php-fpm:8.4 
     volumes:
-      - ../:/var/www/html
+      - ../../:/var/www/html
     expose:
       - "22"      # SSH
       - "8025"    # MailHog
@@ -27,7 +27,7 @@ services:
   nginx:
     image: ghcr.io/imagination-media/magento-k8s/nginx:latest
     volumes:
-      - ../:/var/www/html
+      - ../../:/var/www/html
     expose:
       - "80"      # Web server
     ports:
